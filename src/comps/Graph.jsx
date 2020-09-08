@@ -1,73 +1,51 @@
 import React, { PureComponent } from 'react';
 import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    PieChart, Pie, Sector, Cell, Tooltip
 } from 'recharts';
 
 const data = [
-    {
-        name: 'Janurary', loss: 12, win: 24,
-    },
-    {
-        name: 'Feburary', loss: 8, win: 2,
-    },
-    {
-        name: 'March', loss: 16, win: 8,
-    },
-    {
-        name: 'April', loss: 9, win: 3,
-    },
-    {
-        name: 'May', loss: 15, win: 17,
-    },
-    {
-        name: 'June', loss: 20, win: 24,
-    },
-    {
-        name: 'July', loss: 10, win: 5,
-    },
-    {
-        name: 'August', loss: 18, win: 30,
-    },
-    {
-        name: 'September', loss: 4, win: 8,
-    },
-    {
-        name: 'October', loss: 19, win: 7,
-    },
-    {
-        name: 'November', loss: 12, win: 3,
-    },
-    {
-        name: 'December', loss: 19, win: 21,
-    },
+    { name: 'Wins', value: 50 },
+    { name: 'Loss', value: 20 }
 ];
+
+const COLORS = ['#76D7C4', '#F1948A'];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+    cx, cy, midAngle, innerRadius, outerRadius, percent, index,
+}) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+            {`${(percent * 100).toFixed(0)}%`}
+        </text>
+    );
+};
 
 export default class Example extends PureComponent {
 
-
     render() {
         return (
-            <div style={{ margin: '0 auto' }}>
-                <h3>2020 Win/Loss</h3>
-                <BarChart
-                    width={1200}
-                    height={600}
+            <PieChart style={{ margin: '0 auto' }} width={400} height={400}>
+                <Pie
                     data={data}
-                    margin={{
-                        top: 20, right: 30, left: 20, bottom: 5,
-                    }}
-                    style={{ margin: '0 auto' }}
+                    cx={200}
+                    cy={200}
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="loss" stackId="a" fill="#8884d8" />
-                    <Bar dataKey="win" stackId="a" fill="#82ca9d" />
-                </BarChart>
-            </div>
-
+                    {
+                        data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                    }
+                </Pie>
+                <Tooltip />
+            </PieChart>
         );
     }
 }

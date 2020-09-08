@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Nav from './Nav';
 
 export default function Landing() {
 
-
-
-
+    const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
     return (
+
         <div>
-            <h1>My Bet Tracker</h1>
-            <a href="http://localhost:8080/auth/google">Login/Signup with Google</a>
+            <Nav signedIn={signedIn} />
+
+            <h2>Landing</h2>
+
         </div>
     )
 }
