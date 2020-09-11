@@ -10,6 +10,7 @@ import Nav from "./comps/Nav";
 import "./App.css";
 
 function App() {
+  const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
   const [id, setId] = useState(null);
 
   console.log(id);
@@ -17,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Route exact path="/" component={Landing} />
-      <Protected path="/home" component={Home} />
+      <Protected path="/home" component={Home} id={id} />
       <Route
         path="/login"
         render={(props) => {

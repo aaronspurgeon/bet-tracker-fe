@@ -26,8 +26,8 @@ function Login(props) {
             .then(result => {
                 // Store our new token in local storage so it persists
                 localStorage.setItem("token", result.data.token)
-                localStorage.setItem("user", result.data.user.id)
-                // props.setId(result.data.user.id)
+                // localStorage.setItem("user", result.data.user.id)
+                props.setId(result.data.user.id)
                 console.log(result.data)
                 // Redirect the user to their account page after logging in
                 props.history.push("/home")
