@@ -12,11 +12,11 @@ export default function Home(props) {
     const [bets, setBets] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const userId = localStorage.getItem('user')
-    console.log(props.id)
+    console.log(props.userData)
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/bets/all/${props.id}`)
+            .get(`http://localhost:8080/bets/all/${props.userData.id}`)
             .then(res => {
                 setBets(res.data)
                 setIsLoading(false)
@@ -38,6 +38,7 @@ export default function Home(props) {
                     <>
                         <Graph />
                         <Bets bets={bets} />
+                        <h1>Hello {props.userData.firstName}</h1>
                     </>
                 )}
             </div>

@@ -11,18 +11,27 @@ import "./App.css";
 
 function App() {
   const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
-  const [id, setId] = useState(null);
-
-  console.log(id);
+  // const [id, setId] = useState(null);
+  // const [wins, setWins] = useState(null);
+  // const [loss, setLoss] = useState(null);
+  const [userData, setUserData] = useState({
+    id: null,
+    firstName: null,
+    lastName: null,
+    wins: null,
+    loss: null,
+  });
 
   return (
     <div className="App">
       <Route exact path="/" component={Landing} />
-      <Protected path="/home" component={Home} id={id} />
+      <Protected path="/home" component={Home} userData={userData} />
       <Route
         path="/login"
         render={(props) => {
-          return <Login {...props} setId={setId} />;
+          return (
+            <Login {...props} setUserData={setUserData} userData={userData} />
+          );
         }}
       />
       <Route path="/signup" component={Signup} />

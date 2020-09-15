@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react';
+import Loading from './Loading';
 import axiosWithAuth from "../utils/api";
 import axios from 'axios'
+import { useEffect } from 'react';
 
 
 function Signup(props) {
@@ -9,8 +11,11 @@ function Signup(props) {
         email: '',
         password: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        wins: 0,
+        loss: 0
     })
+    const [userId, setUserId] = useState(null)
 
     const handleChange = (event) => {
         setData({
@@ -25,11 +30,12 @@ function Signup(props) {
         axiosWithAuth()
             .post('/auth/register', data)
             .then(result => {
-                console.log(result)
+                setUserId(result.data)
                 setData({
                     email: '',
                     password: '',
-                    username: ''
+                    firstName: '',
+                    lastName: ''
                 })
                 props.history.push("/")
             })
