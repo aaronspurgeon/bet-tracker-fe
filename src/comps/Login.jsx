@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import axiosWithAuth from "../utils/api"
+import React, { useState, useEffect } from "react";
+import axiosWithAuth from "../utils/api";
+import axios from 'axios'
 
 function Login(props) {
     const [error, setError] = useState()
@@ -7,6 +8,7 @@ function Login(props) {
         password: '',
         email: ''
     })
+    const [id, setId] = useState(null);
 
     const handleChange = (event) => {
         setData({
@@ -27,17 +29,18 @@ function Login(props) {
                 // Store our new token in local storage so it persists
                 localStorage.setItem("token", result.data.token)
                 console.log(result.data)
-                props.setUserData({
-                    ...props.userData,
+                const user = {
+                    id: result.data.user.id,
                     firstName: result.data.user.firstName,
                     lastName: result.data.user.lastName,
                     wins: result.data.user.wins,
-                    loss: result.data.user.loss,
-                    id: result.data.user.id
-                })
+                    loss: result.data.user.loss
+                }
+                sessionStorage.setItem("user_data", JSON.stringify(user))
+                // sessionStorage.setItem("user_id", result.data.user.id)
 
                 // Redirect the user to their account page after logging in
-                props.history.push("/home")
+                props.history.push('/home')
             })
             .catch(err => {
                 console.log('this isnt working heres my error ' + err)

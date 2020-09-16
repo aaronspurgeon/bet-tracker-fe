@@ -11,11 +11,10 @@ import "./App.css";
 
 function App() {
   const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
-  // const [id, setId] = useState(null);
+  const [id, setId] = useState(null);
   // const [wins, setWins] = useState(null);
   // const [loss, setLoss] = useState(null);
   const [userData, setUserData] = useState({
-    id: null,
     firstName: null,
     lastName: null,
     wins: null,
@@ -25,12 +24,17 @@ function App() {
   return (
     <div className="App">
       <Route exact path="/" component={Landing} />
-      <Protected path="/home" component={Home} userData={userData} />
+      <Protected path="/home" component={Home} userData={userData} id={id} />
       <Route
         path="/login"
         render={(props) => {
           return (
-            <Login {...props} setUserData={setUserData} userData={userData} />
+            <Login
+              {...props}
+              setUserData={setUserData}
+              userData={userData}
+              setId={setId}
+            />
           );
         }}
       />

@@ -3,11 +3,13 @@ import Loading from './Loading';
 import axiosWithAuth from "../utils/api";
 import axios from 'axios'
 import { useEffect } from 'react';
+import uuid from 'react-uuid'
 
 
 function Signup(props) {
     const [error, setError] = useState();
     const [data, setData] = useState({
+        id: uuid(),
         email: '',
         password: '',
         firstName: '',

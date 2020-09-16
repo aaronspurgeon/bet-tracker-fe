@@ -9,22 +9,26 @@ import Graph from './Graph';
 export default function Home(props) {
     const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
 
-    const [bets, setBets] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const userId = localStorage.getItem('user')
-    console.log(props.userData)
+    let user = sessionStorage.getItem("user_data")
+    user = JSON.parse(user)
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/bets/all/${props.userData.id}`)
+            .get(`http://localhost:8080/bets/all/${user.id}`)
             .then(res => {
-                setBets(res.data)
+                console.log(res.data)
+                sessionStorage.setItem('bet_list', JSON.stringify(res.data))
                 setIsLoading(false)
             })
             .catch(err => {
-                throw (err);
+                console.log(err)
             })
-    }, bets, isLoading)
+    }, [])
+
+
+
+
     return (
         <div>
             <Nav signedIn={signedIn} />
@@ -36,9 +40,9 @@ export default function Home(props) {
 
                 {!isLoading && (
                     <>
+                        <h1>Hello {user.firstName}</h1>
                         <Graph />
-                        <Bets bets={bets} />
-                        <h1>Hello {props.userData.firstName}</h1>
+                        <Bets />
                     </>
                 )}
             </div>
