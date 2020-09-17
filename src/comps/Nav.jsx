@@ -8,17 +8,20 @@ export default function Nav(props) {
     const logOut = () => {
         localStorage.clear()
     }
-    return (
-        <div>
 
-            {props.signedIn && (<Link to="/logout">Logout</Link>)}
+
+    return (
+        <div className='nav'>
+            <h3>Bet Tracker</h3>
+
+            {props.signedIn && (<Link className='link' to="/logout">Logout</Link>)}
 
 
             {!props.signedIn && (
-                <>
-                    <Link to='/login'>Login</Link>
-                    <Link to='/signup'>Sign Up</Link>
-                </>
+                <div>
+                    <Link className='link' to='/login'>Login</Link>
+                    <Link className='link' to='/signup'>Sign Up</Link>
+                </div>
             )}
 
         </div>

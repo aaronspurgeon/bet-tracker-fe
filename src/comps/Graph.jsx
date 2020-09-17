@@ -3,9 +3,12 @@ import {
     PieChart, Pie, Sector, Cell, Tooltip
 } from 'recharts';
 
+let user = localStorage.getItem("user_data")
+user = JSON.parse(user)
+
 const data = [
-    { name: 'Wins', value: 50 },
-    { name: 'Loss', value: 20 }
+    { name: 'Wins', value: 0 },
+    { name: 'Loss', value: 0 }
 ];
 
 const COLORS = ['#76D7C4', '#F1948A'];

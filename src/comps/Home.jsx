@@ -10,7 +10,7 @@ export default function Home(props) {
     const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
 
     const [isLoading, setIsLoading] = useState(true);
-    let user = sessionStorage.getItem("user_data")
+    let user = localStorage.getItem("user_data")
     user = JSON.parse(user)
 
     useEffect(() => {

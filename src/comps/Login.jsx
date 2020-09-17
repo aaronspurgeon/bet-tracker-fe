@@ -36,7 +36,7 @@ function Login(props) {
                     wins: result.data.user.wins,
                     loss: result.data.user.loss
                 }
-                sessionStorage.setItem("user_data", JSON.stringify(user))
+                localStorage.setItem("user_data", JSON.stringify(user))
                 // sessionStorage.setItem("user_id", result.data.user.id)
 
                 // Redirect the user to their account page after logging in

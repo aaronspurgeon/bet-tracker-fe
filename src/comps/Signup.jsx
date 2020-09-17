@@ -14,8 +14,8 @@ function Signup(props) {
         password: '',
         firstName: '',
         lastName: '',
-        wins: 0,
-        loss: 0
+        wins: 1,
+        loss: 2
     })
     const [userId, setUserId] = useState(null)
 

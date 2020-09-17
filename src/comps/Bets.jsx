@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 export default function Bets() {
     let bets = sessionStorage.getItem("bet_list")
     bets = JSON.parse(bets)
-    const [stateBets, setStateBets] = useState(bets)
     return (
         <div>
             {
