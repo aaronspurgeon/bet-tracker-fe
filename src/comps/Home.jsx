@@ -4,6 +4,7 @@ import Bets from './Bets'
 import Loading from './Loading';
 import axios from 'axios';
 import Graph from './Graph';
+import SideCar from './SideCar';
 
 
 export default function Home(props) {
@@ -18,7 +19,7 @@ export default function Home(props) {
             .get(`http://localhost:8080/bets/all/${user.id}`)
             .then(res => {
                 console.log(res.data)
-                sessionStorage.setItem('bet_list', JSON.stringify(res.data))
+                localStorage.setItem('bet_list', JSON.stringify(res.data))
                 setIsLoading(false)
             })
             .catch(err => {
@@ -30,22 +31,25 @@ export default function Home(props) {
 
 
     return (
-        <div>
-            <Nav signedIn={signedIn} />
-            <h1>Home</h1>
-            {isLoading && (
-                <Loading />
-            )}
-            <div>
+        <div className="home-wrapper">
+            <SideCar />
 
-                {!isLoading && (
-                    <>
-                        <h1>Hello {user.firstName}</h1>
-                        <Graph />
-                        <Bets />
-                    </>
+            <div>
+                <Nav signedIn={signedIn} />
+                {isLoading && (
+                    <Loading />
                 )}
+                <div>
+
+                    {!isLoading && (
+                        <>
+                            <Graph />
+                            <Bets />
+                        </>
+                    )}
+                </div>
             </div>
+
         </div>
     )
 }

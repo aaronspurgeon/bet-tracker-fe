@@ -1,5 +1,5 @@
 body {
-  background: #212121;
+  background: #272a2f;
   color: white;
 }
 
@@ -83,6 +83,14 @@ body {
 .link {
   text-decoration: none;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-right: 20px;
+}
+
+/* home styles  */
+.home-wrapper {
+  display: grid;
+  grid-template-rows: 100px 1fr 100px;
+  grid-template-columns: 1450px 1fr 1450px;
+  justify-content: stretch;
 }

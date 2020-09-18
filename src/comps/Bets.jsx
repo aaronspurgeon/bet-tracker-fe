@@ -5,14 +5,17 @@ export default function Bets() {
     bets = JSON.parse(bets)
     return (
         <div>
-            {
-                bets.map((bet, id) => (
-                    <div key={id}>
-                        <p>{bet.opponent1} vs {bet.opponent2}</p>
-                        <p>Result: {bet.win_loss} </p>
-                    </div>
-                ))
-            }
+            {bets === null ? (
+                <p>You currently have no saved bets</p>
+            ) : (
+
+                    bets.map((bet, id) => (
+                        <div key={id}>
+                            <p>{bet.opponent1} vs {bet.opponent2}</p>
+                            <p>Result: {bet.win_loss} </p>
+                        </div>
+                    ))
+                )}
         </div >
     )
 }
