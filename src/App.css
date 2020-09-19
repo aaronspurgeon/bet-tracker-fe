@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Monument Extended";
+  src: url(./fonts/MonumentExtended-Regular.otf) format("opentype");
+}
+
 body {
   background: #272a2f;
   color: white;
@@ -77,7 +82,6 @@ body {
   justify-content: flex-end;
   align-items: center;
   padding: 1%;
-  border-bottom: 1px solid white;
 }
 
 .link {
@@ -94,11 +98,11 @@ body {
 
 .content {
   width: 100%;
-  /* padding: 2%; */
+  background: #272a2f;
 }
 
 .dashboard {
-  padding: 2%;
+  padding: 5%;
 }
 
 /* tabs */
@@ -122,7 +126,6 @@ body {
 }
 
 .icon {
-  /* height: 50%; */
   padding: 7px 14px;
   margin-right: 20px;
   font-size: 2.5rem;
@@ -136,4 +139,38 @@ body {
 
 .icon_active {
   background: white;
+}
+
+/* sidecar styles */
+.side_car {
+  text-align: center;
+  width: 25%;
+  height: 100vh;
+  background: #343742;
+  /* border-radius: 40px 40px 40px 40px; */
+  border-bottom-right-radius: 60px;
+  border-top-right-radius: 60px;
+}
+
+.side_car h3 {
+  font-size: 2.5rem;
+  color: #6c7bca;
+  font-family: "Monument Extended";
+  margin-top: 60px;
+}
+
+.side_car_tab {
+  display: flex;
+  text-align: center;
+  margin-left: 50px;
+}
+
+.side_car_tab h4 {
+  margin-left: 20px;
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+
+.side_tab_wrapper {
+  margin-top: 150px;
 }

@@ -29,7 +29,6 @@ export default function Tabs() {
                         <h4 style={{ marginLeft: '20px' }}>{tab.sport}</h4>
                     </div>
                 </div>
-
             ))
             }
         </div >

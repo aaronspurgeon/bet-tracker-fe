@@ -9,10 +9,13 @@ import Tabs from './Tabs';
 
 export default function Home(props) {
     const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
-
     const [isLoading, setIsLoading] = useState(true);
+    const [betState, setBetState] = useState(null)
+
     let user = localStorage.getItem("user_data")
     user = JSON.parse(user)
+    let bets = localStorage.getItem('bet_list');
+    bets = JSON.parse(bets)
 
     useEffect(() => {
         axios
@@ -20,12 +23,15 @@ export default function Home(props) {
             .then(res => {
                 console.log(res.data)
                 localStorage.setItem('bet_list', JSON.stringify(res.data))
+                setBetState(bets)
                 setIsLoading(false)
             })
             .catch(err => {
                 console.log(err)
             })
     }, [])
+
+
 
 
 
@@ -46,7 +52,7 @@ export default function Home(props) {
                             <>
                                 <Tabs />
                                 <Graph />
-                                <Bets />
+                                <Bets bets={betState} />
                             </>
                         )}
                     </div>

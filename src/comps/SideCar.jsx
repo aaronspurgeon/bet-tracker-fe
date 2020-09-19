@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import SideCarTabs from './SideCarTabs';
 
 export default function SideCar() {
     return (
-        <div style={{ border: '1px solid red', width: '25%', height: '100vh' }}>
+        <div className='side_car'>
             <h3>Bet Tracker</h3>
+            <SideCarTabs />
         </div>
     )
 }
