@@ -174,3 +174,18 @@ body {
 .side_tab_wrapper {
   margin-top: 150px;
 }
+
+/* bets styles */
+.bets_wrapper {
+  border: 1px solid red;
+  width: 40%;
+  border-radius: 20px;
+  background: #343742;
+  margin-top: 40px;
+  height: 200px;
+  padding: 2%;
+}
+
+.bets {
+  display: flex;
+}
