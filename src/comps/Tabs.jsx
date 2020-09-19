@@ -12,10 +12,10 @@ export default function Tabs() {
 
     const [active, setActive] = useState(0)
 
-    const activeHandler = (e, index) => {
-        e.preventDefault();
-        console.log(index)
-        setActive(index)
+    const activeHandler = (id) => {
+        // e.preventDefault();
+        console.log(id)
+        setActive(id)
     }
 
 
@@ -23,21 +23,15 @@ export default function Tabs() {
     return (
         <div className='tab_container'>
             {tabs.map((tab, index) => (
+                <div key={index}>
+                    <div onClick={() => activeHandler(index)} className={active === index ? 'sport_btn active' : 'sport_btn'}>
+                        <h4 className={active === index ? 'icon icon_active' : 'icon'}>{tab.icon}</h4>
+                        <h4 style={{ marginLeft: '20px' }}>{tab.sport}</h4>
+                    </div>
+                </div>
 
-                < div onClick={(e, index) => activeHandler(e, index)} key={index} className={active === index ? 'sport_btn active' : 'sport_btn'}>
-                    <h4 className='icon'>{tab.icon}</h4> <h4>{tab.sport}</h4></div>
             ))
             }
-            {/* <div className='sport_btn'>
-                <h4 className='icon'>🥊</h4> <h4>MMA</h4></div>
-            <div className='sport_btn'>
-                <h4 className='icon'>🏀</h4>  <h4>NBA</h4> </div>
-            <div className='sport_btn'>
-                <h4 className='icon'>🏈</h4>  <h4>NFL</h4> </div>
-            <div className='sport_btn'>
-                <h4 className='icon'>⚾️</h4> <h4>MLB</h4> </div>
-            <div className='sport_btn'>
-                <h4 className='icon'>🏒</h4> <h4>NHL</h4> </div> */}
         </div >
     )
 }
