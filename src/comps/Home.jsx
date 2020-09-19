@@ -5,7 +5,7 @@ import Loading from './Loading';
 import axios from 'axios';
 import Graph from './Graph';
 import SideCar from './SideCar';
-
+import Tabs from './Tabs';
 
 export default function Home(props) {
     const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
@@ -34,20 +34,24 @@ export default function Home(props) {
         <div className="home-wrapper">
             <SideCar />
 
-            <div>
+            <div className='content'>
                 <Nav signedIn={signedIn} />
-                {isLoading && (
-                    <Loading />
-                )}
-                <div>
-
-                    {!isLoading && (
-                        <>
-                            <Graph />
-                            <Bets />
-                        </>
+                <div className="dashboard">
+                    {isLoading && (
+                        <Loading />
                     )}
+                    <div>
+
+                        {!isLoading && (
+                            <>
+                                <Tabs />
+                                <Graph />
+                                <Bets />
+                            </>
+                        )}
+                    </div>
                 </div>
+
             </div>
 
         </div>

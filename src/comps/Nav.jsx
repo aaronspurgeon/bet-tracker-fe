@@ -10,8 +10,6 @@ export default function Nav(props) {
 
     return (
         <div className='nav'>
-            <h3>Bet Tracker</h3>
-
             {props.signedIn && (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <p style={{ fontSize: '1.4rem', marginRight: '20px', borderBottom: '1px solid white' }}>{user.firstName} {user.lastName}</p>
                 <Link className='link' to="/logout">Logout</Link>
