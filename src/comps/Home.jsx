@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Nav from './Nav';
 import Bets from './Bets'
 import Loading from './Loading';
@@ -6,30 +6,57 @@ import axios from 'axios';
 import Graph from './Graph';
 import SideCar from './SideCar';
 import Tabs from './Tabs';
+import { connect } from "react-redux";
+import { fetchBets } from '../actions/betsAction';
 
-export default function Home(props) {
+function Home(props) {
     const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
     const [isLoading, setIsLoading] = useState(true);
-    const [betState, setBetState] = useState(null)
 
-    let user = localStorage.getItem("user_data")
-    user = JSON.parse(user)
-    let bets = localStorage.getItem('bet_list');
-    bets = JSON.parse(bets)
 
+
+
+
+    // console.log(props.sport);
+
+    // let bets = localStorage.getItem('bet_list');
+    // bets = JSON.parse(bets)
+
+    // useLayoutEffect(() => {
+    //     const getBets = async () => {
+    //         try {
+    //             const res = await axios.get(`http://localhost:8080/bets/${props.sport}/${user.id}`);
+    //             console.log(res.data, 'hello')
+    //             console.log(props.sport, 'sport call')
+    //             localStorage.setItem('bet_list', JSON.stringify(res.data))
+    //             props.setBetState(bets)
+    //             setIsLoading(false)
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+
+    //     }
+    //     getBets()
+
+    //     axios
+    //         .get(`http://localhost:8080/bets/all/${user.id}`)
+    //         .then(res => {
+    //             console.log(res.data, 'hello')
+    //             localStorage.setItem('bet_list', JSON.stringify(res.data))
+    //             props.setBetState(bets)
+    //             setIsLoading(false)
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         })
+    // }, [])
+    // console.log(props.sport, 'sport update')
+    let user = localStorage.getItem("user_data");
+    user = JSON.parse(user);
     useEffect(() => {
-        axios
-            .get(`http://localhost:8080/bets/all/${user.id}`)
-            .then(res => {
-                console.log(res.data)
-                localStorage.setItem('bet_list', JSON.stringify(res.data))
-                setBetState(bets)
-                setIsLoading(false)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+        props.fetchBets(user.id, props.sport);
+    }, []);
+    console.log(props.bets)
 
 
 
@@ -43,23 +70,45 @@ export default function Home(props) {
             <div className='content'>
                 <Nav signedIn={signedIn} />
                 <div className="dashboard">
-                    {isLoading && (
+                    {props.isLoading && (
                         <Loading />
                     )}
                     <div>
 
-                        {!isLoading && (
+                        {!props.isLoading && (
                             <>
-                                <Tabs />
+                                <Tabs tabs={props.tabs} setTabs={props.setItemsetTabs} activeHandler={props.activeHandler} active={props.active} setActive={props.setActive} />
                                 <Graph />
-                                <Bets bets={betState} />
+                                <div>
+                                    <h3 style={{ fontSize: '2rem' }}>Your bets</h3>
+                                    <div className="bets_wrapper">
+                                        {props.bets.map((bet, id) => (
+                                            <div className='bets' key={id}>
+                                                <p>{bet.opponent1} vs {bet.opponent2}</p>
+                                                <p>Result: {bet.win_loss} </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div >
                             </>
                         )}
                     </div>
                 </div>
-
             </div>
-
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        bets: state.bets,
+        isLoading: state.isLoading,
+        error: state.error,
+    };
+}
+
+const mapDispatchToProps = {
+    fetchBets,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

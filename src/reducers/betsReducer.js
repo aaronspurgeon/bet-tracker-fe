@@ -5,17 +5,13 @@ import {
 } from "../actions/betsAction";
 
 export const initialState = {
-  places: [
-    {
-      restID: null,
-      restName: "",
-    },
-  ],
+  bets: [""],
   isLoading: true,
   error: null,
 };
 
 export function reducerList(state = initialState, action) {
+  let bets = state.bets;
   switch (action.type) {
     case FETCH_BET_START:
       return {
@@ -23,9 +19,10 @@ export function reducerList(state = initialState, action) {
         isLoading: true,
       };
     case FETCH_BET_SUCCESS:
+      bets = action.payload;
       return {
         ...state,
-        places: action.payload,
+        bets: Object.assign(bets),
         isLoading: false,
       };
     case FETCH_BET_ERROR:

@@ -7,8 +7,8 @@ let user = localStorage.getItem("user_data")
 user = JSON.parse(user)
 
 const data = [
-    { name: 'Wins', value: user.wins },
-    { name: 'Loss', value: user.loss }
+    { name: 'Wins', value: 0 },
+    { name: 'Loss', value: 0 }
 ];
 
 const COLORS = ['#76D7C4', '#F1948A'];
