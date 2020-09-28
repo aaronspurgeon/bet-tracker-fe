@@ -55,7 +55,8 @@ function Home(props) {
     user = JSON.parse(user);
     useEffect(() => {
         props.fetchBets(user.id, props.sport);
-    }, []);
+        console.log('firing again')
+    }, [props.sport]);
     console.log(props.bets)
 
 
