@@ -11,8 +11,6 @@ import { fetchBets } from '../actions/betsAction';
 
 function Home(props) {
     const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
-    const [isLoading, setIsLoading] = useState(true);
-
 
 
 
@@ -83,6 +81,11 @@ function Home(props) {
                                 <div>
                                     <h3 style={{ fontSize: '2rem' }}>Your bets</h3>
                                     <div className="bets_wrapper">
+                                        {props.bets.length === 0 && (
+                                            <div className="bets">
+                                                <p>You have no bets saved in this category.</p>
+                                            </div>
+                                        )}
                                         {props.bets.map((bet, id) => (
                                             <div className='bets' key={id}>
                                                 <p>{bet.opponent1} vs {bet.opponent2}</p>
