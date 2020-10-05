@@ -7,8 +7,8 @@ let user = localStorage.getItem("user_data")
 user = JSON.parse(user)
 
 const data = [
-    { name: 'Wins', value: 0 },
-    { name: 'Loss', value: 0 }
+    { name: 'Wins', value: 1 },
+    { name: 'Loss', value: 2 }
 ];
 
 const COLORS = ['#76D7C4', '#F1948A'];
@@ -34,7 +34,7 @@ export default class Example extends PureComponent {
         return (
             <div className='graph-wrapper'>
                 <h2 style={{ fontSize: '2rem' }}>Your Win/Loss</h2>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '1px solid red', width: '20%', background: '#343742', borderRadius: '20px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '1px solid red', width: '100%', background: '#343742', borderRadius: '20px' }}>
                     <PieChart width={400} height={400}>
                         <Pie
                             data={data}
@@ -50,7 +50,6 @@ export default class Example extends PureComponent {
                                 data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
                             }
                         </Pie>
-
                         <Tooltip />
                     </PieChart>
                 </div>

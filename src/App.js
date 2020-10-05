@@ -7,13 +7,12 @@ import Login from "./comps/Login";
 import Logout from "./comps/Logout";
 import Signup from "./comps/Signup";
 import Nav from "./comps/Nav";
+import NewBetForm from "./comps/NewBetForm";
 import "./App.css";
 
 function App(props) {
   const [signedIn, setSignedIn] = useState(localStorage.getItem("token"));
   const [id, setId] = useState(null);
-  // const [wins, setWins] = useState(null);
-  // const [loss, setLoss] = useState(null);
   const [userData, setUserData] = useState({
     firstName: null,
     lastName: null,
@@ -74,6 +73,7 @@ function App(props) {
       />
       <Route path="/signup" component={Signup} />
       <Protected exact path="/logout" component={Logout} />
+      <Protected path="/new" component={NewBetForm} />
     </div>
   );
 }

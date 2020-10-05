@@ -103,6 +103,7 @@ body {
 
 .dashboard {
   padding: 5%;
+  width: 100%;
 }
 
 /* tabs */
@@ -184,8 +185,20 @@ body {
   margin-top: 40px;
   height: 200px;
   padding: 2%;
+  overflow: auto;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .bets {
   display: flex;
+  margin-top: 5px;
+}
+
+.win {
+  background-color: #76d7c4;
+}
+
+.loss {
+  background-color: #f1948a;
 }

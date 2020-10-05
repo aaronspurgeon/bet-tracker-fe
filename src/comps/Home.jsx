@@ -77,23 +77,26 @@ function Home(props) {
                         {!props.isLoading && (
                             <>
                                 <Tabs tabs={props.tabs} setTabs={props.setItemsetTabs} activeHandler={props.activeHandler} active={props.active} setActive={props.setActive} />
-                                <Graph />
-                                <div>
-                                    <h3 style={{ fontSize: '2rem' }}>Your bets</h3>
-                                    <div className="bets_wrapper">
-                                        {props.bets.length === 0 && (
-                                            <div className="bets">
-                                                <p>You have no bets saved in this category.</p>
-                                            </div>
-                                        )}
-                                        {props.bets.map((bet, id) => (
-                                            <div className='bets' key={id}>
-                                                <p>{bet.opponent1} vs {bet.opponent2}</p>
-                                                <p>Result: {bet.win_loss} </p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div >
+                                <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
+                                    <Graph />
+                                    <div style={{ width: '100%' }}>
+                                        <h3 style={{ fontSize: '2rem' }}>Your bets</h3>
+                                        <div className="bets_wrapper">
+                                            {props.bets.length === 0 && (
+                                                <div className="bets">
+                                                    <p>You have no bets saved in this category.</p>
+                                                </div>
+                                            )}
+                                            {props.bets.map((bet, id) => (
+                                                <div className={bet.win_loss === 'win' ? 'bets win' : 'bets loss'} key={id}>
+                                                    <p>{bet.opponent1} vs {bet.opponent2}</p>
+                                                    <p>Result: {bet.win_loss} </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div >
+                                </div>
+
                             </>
                         )}
                     </div>
